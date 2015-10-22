@@ -782,6 +782,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BaseApiWinRT.cpp" />
+    <ClCompile Include="winrtutils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tesseract304.h" />
@@ -1613,5 +1614,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BaseApiWinRT.h" />
+    <ClInclude Include="winrtutils.h" />
   </ItemGroup>
 </Project>
