@@ -1,3 +1,15 @@
+Tesseract WinRT (Windows Phone/Windows Store Apps)
+==================================================
+
+This project is a fork of Tesseract Open Source OCR for the WinRT platform (Windows Phone/Windows Store Apps)
+
+Currently it is only a proof of concept, only the Debug-x86 configuration works, it depends on Leptonica WinRT (https://github.com/yoisel/leptonica_1.72_winrt) as a lib file.
+
+ Licensed under the Apache License, same as the original Tesseract source code.
+
+Original README file follows:
+=============================
+
 [![Build Status](https://travis-ci.org/tesseract-ocr/tesseract.svg?branch=master)](https://travis-ci.org/tesseract-ocr/tesseract)
 [![Build status](https://ci.appveyor.com/api/projects/status/miah0ikfsf0j3819?svg=true)](https://ci.appveyor.com/project/zdenop/tesseract/)
 
