@@ -77,6 +77,7 @@
 #include "renderer.h"
 #include "strngs.h"
 #include "openclwrapper.h"
+#include "winrtutils.h"
 
 BOOL_VAR(stream_filelist, FALSE, "Stream a filelist from stdin");
 

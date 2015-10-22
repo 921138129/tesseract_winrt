@@ -27,6 +27,8 @@
 #include          <stdlib.h>
 #include          "ccutil.h"
 
+#include		  "winrtutils.h"
+
 #define VARDIR        "configs/" /**< variables files */
 #define EXTERN
 

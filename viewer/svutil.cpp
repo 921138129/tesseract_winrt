@@ -58,6 +58,7 @@ struct addrinfo {
 #ifndef GRAPHICS_DISABLED
 
 #include "svutil.h"
+#include "winrtutils.h"
 
 const int kBufferSize = 65536;
 const int kMaxMsgSize = 4096;
@@ -73,6 +74,9 @@ void SVSync::ExitThread() {
 
 // Starts a new process.
 void SVSync::StartProcess(const char* executable, const char* args) {
+#ifdef TESSERACT_WINRT
+	// Not Implemented (API limitations)
+#else
   std::string proc;
   proc.append(executable);
   proc.append(" ");
@@ -119,6 +123,7 @@ void SVSync::StartProcess(const char* executable, const char* args) {
     argv[argc] = NULL;
     execvp(executable, argv);
   }
+#endif
 #endif
 }
 

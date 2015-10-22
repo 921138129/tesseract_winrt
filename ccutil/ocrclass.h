@@ -37,6 +37,7 @@
 #endif
 #include          <time.h>
 #include          "host.h"
+#include		  "winrtutils.h"
 
 /*Maximum lengths of various strings*/
 #define MAX_FONT_NAME   34       /*name of font */
