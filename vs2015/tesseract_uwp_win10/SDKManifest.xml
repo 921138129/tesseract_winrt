@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FileList
+  DisplayName = "Tesseract OCR"
+  ProductFamilyName="Tesseract OCR"
+
+  TargetPlatform="UAP" 
+  TargetPlatformMinVersion="10.0.0.1" 
+  TargetPlatformVersion="10.0.10240.0"
+  TargetFramework = ".NETCore,version=v4.5.2"
+ 
+  SDKType="External"
+  MinVSVersion = "14.0"
+  CopyRedistToSubDirectory="."  
+  AppliesTo = "WindowsAppContainer + ( Managed | Native )"
+  SupportedArchitectures = "x86;x64;ARM" 
+  MoreInfo = "https://github.com/yoisel/tesseract_winrt"
+  DependsOn = "Microsoft.VCLibs, version=14.0"
+  SupportsMultipleVersions="Error"
+  SupportPrefer32Bit="True" 
+>
+  
+  <File Reference="Tesseract.winmd" Implementation="Tesseract.dll" >    
+  </File>
+</FileList>

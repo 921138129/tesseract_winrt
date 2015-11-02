@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="Tesseract.UWP-1A653454-9664-486C-99D0-D72FE7A2A544" Version="3.04" Language="en-US" Publisher="Yoisel Melis Santana" />
+    <DisplayName>Tesseract OCR wrapper for WinRT</DisplayName>
+    <Description xml:space="preserve">Tesseract for Universal Windows Platform</Description>
+    <MoreInfo>https://github.com/yoisel/tesseract_winrt</MoreInfo>
+    <License>License.txt</License>
+    <Tags>UWP,WINRT,Windows Store,Windows Phone,Universal Windows Platform,Windows 10,OCR,Tesseract</Tags>
+  </Metadata>
+  <Installation AllUsers="true" Scope="Global">
+    <!--
+    Do not change the values for TargetPlatformIdentifier and TargetPlatformVersion unless you really know what you are doing.
+	  Details at: https://mix.office.com/watch/57b0xviavj6r
+    Note: The value for SdkName should not contain any space
+      -->
+    <InstallationTarget Id="Microsoft.ExtensionSDK" TargetPlatformIdentifier="Windows Kits" TargetPlatformVersion="10" SdkName="Tesseract.UWP"  SdkVersion="3.04" />
+  </Installation>
+  <Dependencies>
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.ExtensionSDK" Path="SDKManifest.xml" />
+    <Asset Type="Microsoft.ExtensionSDK" Path="References\CommonConfiguration\Neutral\Tesseract.winmd" />
+
+    <Asset Type="Microsoft.ExtensionSDK" Path="Redist\CommonConfiguration\Debug\Arm\Tesseract.dll" />
+    <Asset Type="Microsoft.ExtensionSDK" Path="Redist\CommonConfiguration\Debug\x86\Tesseract.dll" />
+    <Asset Type="Microsoft.ExtensionSDK" Path="Redist\CommonConfiguration\Debug\x64\Tesseract.dll" />
+    <Asset Type="Microsoft.ExtensionSDK" Path="Redist\CommonConfiguration\Retail\Arm\Tesseract.dll" />
+    <Asset Type="Microsoft.ExtensionSDK" Path="Redist\CommonConfiguration\Retail\x86\Tesseract.dll" />
+    <Asset Type="Microsoft.ExtensionSDK" Path="Redist\CommonConfiguration\Retail\x64\Tesseract.dll" />
+  </Assets>
+</PackageManifest>

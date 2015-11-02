@@ -158,10 +158,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\tesseract304\tesseract304.vcxproj">
-      <Project>{38f2616c-7f32-4637-8e61-98194a1b1995}</Project>
-      <Name>tesseract304_uwp</Name>
-    </ProjectReference>
+    <SDKReference Include="Microsoft.VCLibs, version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
+    </SDKReference>
+    <SDKReference Include="Tesseract.UWP, Version=3.04">
+      <Name>Tesseract OCR</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

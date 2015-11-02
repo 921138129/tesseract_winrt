@@ -39,26 +39,33 @@ namespace tesseract_sample_app_uwp
             openPicker.FileTypeFilter.Add(".jpg");
             openPicker.FileTypeFilter.Add(".jpeg");
             openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".bmp");
 
             StorageFile file = await openPicker.PickSingleFileAsync();
             if (file != null)
             {
-                BitmapImage bitmapImage = new BitmapImage();
+                try
+                {
+                    BitmapImage bitmapImage = new BitmapImage();
 
-                /*
-                bitmapImage.SetSource(stream);
-                image.Source = bitmapImage;
-                */
-                Tesseract.BaseApiWinRT tessBaseApi = new Tesseract.BaseApiWinRT();
+                    IRandomAccessStream stream = await file.OpenReadAsync();
+                    await bitmapImage.SetSourceAsync(stream);
+                    image.Source = bitmapImage;
 
-                StorageFolder tessdataFolderobj = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("tessdata");
-                tessBaseApi.Init(tessdataFolderobj.Path, "eng");
+                    Tesseract.BaseApiWinRT tessBaseApi = new Tesseract.BaseApiWinRT();
 
-                IRandomAccessStream stream = await file.OpenReadAsync();
-                Rect winrtRect = new Rect(0, 0, 10000, 10000);
-                string result = await tessBaseApi.TesseractRectAsync(stream, winrtRect);
+                    StorageFolder tessdataFolderobj = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("tessdata");
+                    await tessBaseApi.InitAsync(tessdataFolderobj.Path, "eng");
 
-                textBlock.Text = result;
+                    Rect winrtRect = new Rect(0, 0, 10000, 10000);
+                    string result = await tessBaseApi.TesseractRectAsync(stream, winrtRect);
+
+                    textBlock.Text = result;
+                }
+                catch (Exception ex)
+                {
+                    textBlock.Text = "ERROR!!! - " + ex.Message;
+                }
             }
         }
     }

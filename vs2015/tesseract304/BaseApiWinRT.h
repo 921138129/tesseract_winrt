@@ -1,4 +1,22 @@
-#pragma 
+/**********************************************************************
+* File:        BaseApiWinRT.cpp
+* Description: BaseApi class wrapper for interop with WinRT/WinPhone Apps
+* Author:      Yoisel Melis Santana
+* Created:     Oct 14 2015
+*
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+** http://www.apache.org/licenses/LICENSE-2.0
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*
+**********************************************************************/
+
+#pragma
 
 
 namespace Tesseract
@@ -185,18 +203,18 @@ namespace Tesseract
 		* If set_only_non_debug_params is true, only params that do not contain
 		* "debug" in the name will be set.
 		*/
-		int Init(Platform::String^ datapath, Platform::String^ language, OcrEngineMode mode,
+		Windows::Foundation::IAsyncOperation<int>^ InitAsync(Platform::String^ datapath, Platform::String^ language, OcrEngineMode mode,
 			const Platform::Array<Platform::String^> ^ configs,
 			const Platform::Array<Platform::String^> ^ vars_vec,
 			const Platform::Array<Platform::String^> ^ vars_values,
 			bool set_only_non_debug_params);
 
-		int Init(Platform::String^ datapath, Platform::String^ language, OcrEngineMode mode) {
-			return Init(datapath, language, mode, nullptr, nullptr, nullptr, false);
+		Windows::Foundation::IAsyncOperation<int>^ InitAsync(Platform::String^ datapath, Platform::String^ language, OcrEngineMode mode) {
+			return InitAsync(datapath, language, mode, nullptr, nullptr, nullptr, false);
 		}
 
-		int Init(Platform::String^ datapath, Platform::String^ language) {
-			return Init( datapath, language, OcrEngineMode::OEM_DEFAULT, nullptr, nullptr, nullptr, false);
+		Windows::Foundation::IAsyncOperation<int>^ InitAsync(Platform::String^ datapath, Platform::String^ language) {
+			return InitAsync( datapath, language, OcrEngineMode::OEM_DEFAULT, nullptr, nullptr, nullptr, false);
 		}
 
 
@@ -218,25 +236,59 @@ namespace Tesseract
 		* Recognize a rectangle from an image and return the result as a string.
 		* May be called many times for a single Init.
 		* Currently has no error checking.
-		* Greyscale of 8 and color of 24 or 32 bits per pixel may be given.
-		* Palette color images will not work properly and must be converted to
-		* 24 bit.
-		* Binary images of 1 bit per pixel may also be given but they must be
-		* byte packed with the MSB of the first byte being the first pixel, and a
-		* 1 represents WHITE. For binary images set bytes_per_pixel=0.
-		* The recognized text is returned as a char* which is coded
-		* as UTF8 and must be freed with the delete [] operator.
-		*
-		* Note that TesseractRect is the simplified convenience interface.
-		* For advanced uses, use SetImage, (optionally) SetRectangle, Recognize,
-		* and one or more of the Get*Text functions below.
 		*/
 		Windows::Foundation::IAsyncOperation<Platform::String^>^ TesseractRectAsync(
 			Windows::Storage::Streams::IRandomAccessStream ^ inputImage, Windows::Foundation::Rect rect);
 
+		/**
+		* Provide an image for Tesseract to recognize. Format is as TesseractRectAsync above. 
+		* SetImage clears all recognition results, and sets the rectangle to the
+		* full image, so it may be followed immediately by a GetUTF8TextAsync, and it
+		* will automatically perform recognition.
+		*/
+		void SetImage(Windows::Storage::Streams::IRandomAccessStream ^ inputImage);
+
+
+		/**
+		* The recognized text is returned as a char* which is coded
+		* as UTF8 and must be freed with the delete [] operator.
+		*/
+		Windows::Foundation::IAsyncOperation<Platform::String^>^ GetUTF8TextAsync();
+
+		/**
+		* Set the resolution of the source image in pixels per inch so font size
+		* information can be calculated in results.  Call this after SetImage().
+		*/
+		void SetSourceResolution(int ppi);
+
+		/**
+		* Restrict recognition to a sub-rectangle of the image. Call after SetImage.
+		* Each SetRectangle clears the recogntion results so multiple rectangles
+		* can be recognized with the same image.
+		*/
+		void SetRectangle(int left, int top, int width, int height);
+
+		/**
+		* Free up recognition results and any stored image data, without actually
+		* freeing any recognition data that would be time-consuming to reload.
+		* Afterwards, you must call SetImage or TesseractRect before doing
+		* any Recognize or Get* operation.
+		*/
+		void Clear();
+
+		/**
+		* Close down tesseract and free up all memory. End() is equivalent to
+		* destructing and reconstructing your TessBaseAPI.
+		* Once End() has been used, none of the other API functions may be used
+		* other than Init and anything declared above it in the class definition.
+		*/
+		void End();
+
 	private:
 		tesseract::TessBaseAPI * baseAPI;
 		~BaseApiWinRT();
+
+		void GetBitmapLockFromWinRTStream(Windows::Storage::Streams::IRandomAccessStream ^ inputImage, CComPtr<IWICBitmapLock> & m_pBitmapLock, UINT & imageWidth, UINT & imageHeight);
 
 #if 0
 
