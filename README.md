@@ -11,38 +11,11 @@ Compressed image formats like png and jpeg are still supported as input and will
 
 There is one project in the solution for generating a VSIX package (a visual studio extension), just for the UWP platform with Visual Studio 2015 at the moment.
 
+There is one C# sample project that shows how to use the library.
+
 Supported platforms: Windows Store Apps -> Windows 8.1, Windows Phone 8.1 and UWP (Windows 8 might come later, Windows Phone 8 however...)
 
 Supported CPU architectures: x86, x64 and ARM (since this is a native library, the AnyCPU configuration cannot be supported).
-
-Sample code (C#) for using the library once it is built:
-
-FileOpenPicker openPicker = new FileOpenPicker();
-openPicker.ViewMode = PickerViewMode.Thumbnail;
-openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-openPicker.FileTypeFilter.Add(".jpg");
-openPicker.FileTypeFilter.Add(".jpeg");
-openPicker.FileTypeFilter.Add(".png");
-openPicker.FileTypeFilter.Add(".bmp");
-
-StorageFile file = await openPicker.PickSingleFileAsync();
-if (file != null)
-{
-    try
-    {
-        IRandomAccessStream stream = await file.OpenReadAsync();
-        Tesseract.BaseApiWinRT tessBaseApi = new Tesseract.BaseApiWinRT();
-        StorageFolder tessdataFolderobj = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("tessdata");
-        await tessBaseApi.InitAsync(tessdataFolderobj.Path, "eng");
-        Rect winrtRect = new Rect(0, 0, 10000, 10000); // This is just an example
-        string result = await tessBaseApi.TesseractRectAsync(stream, winrtRect);
-        textBlock.Text = result;
-    }
-    catch (Exception ex)
-    {
-        textBlock.Text = "ERROR!!! - " + ex.Message;
-    }
-}
 
 Licensed under the Apache License, same as the original Tesseract source code.
 
