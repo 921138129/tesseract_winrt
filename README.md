@@ -1,11 +1,50 @@
 Tesseract WinRT (Windows Phone/Windows Store Apps)
 ==================================================
 
-This project is a fork of Tesseract Open Source OCR for the WinRT platform (Windows Phone/Windows Store Apps)
+This project is a fork of Tesseract Open Source OCR, modified for the WinRT platform (Windows Phone/Windows Store Apps)
 
-Currently it is only a proof of concept, only the Debug-x86 configuration works, it depends on Leptonica WinRT (https://github.com/yoisel/leptonica_1.72_winrt) as a lib file.
+Currently it is only a proof of concept, a wrapper class that provides only a few configuration methods plus the methods TesseractRect, SetImage and GetUTF8Text fron the TessBaseAPI class. It depends on Leptonica WinRT (https://github.com/yoisel/leptonica_1.72_winrt) as a lib file, and the rest of the regular Tesseract and Leptonica dependencies are all disabled.
 
- Licensed under the Apache License, same as the original Tesseract source code.
+Some internal features might be also disabled as result of the restrictions imposed by the WinRT platform, or the missing dependencies.
+
+Compressed image formats like png and jpeg are still supported as input and will be decompressed on the fly using WIC (Windows Imaging Component).
+
+There is one project in the solution for generating a VSIX package (a visual studio extension), just for the UWP platform with Visual Studio 2015 at the moment.
+
+Supported platforms: Windows Store Apps -> Windows 8.1, Windows Phone 8.1 and UWP (Windows 8 might come later, Windows Phone 8 however...)
+
+Supported CPU architectures: x86, x64 and ARM (since this is a native library, the AnyCPU configuration cannot be supported).
+
+Sample code (C#) for using the library once it is built:
+
+FileOpenPicker openPicker = new FileOpenPicker();
+openPicker.ViewMode = PickerViewMode.Thumbnail;
+openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+openPicker.FileTypeFilter.Add(".jpg");
+openPicker.FileTypeFilter.Add(".jpeg");
+openPicker.FileTypeFilter.Add(".png");
+openPicker.FileTypeFilter.Add(".bmp");
+
+StorageFile file = await openPicker.PickSingleFileAsync();
+if (file != null)
+{
+    try
+    {
+        IRandomAccessStream stream = await file.OpenReadAsync();
+        Tesseract.BaseApiWinRT tessBaseApi = new Tesseract.BaseApiWinRT();
+        StorageFolder tessdataFolderobj = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("tessdata");
+        await tessBaseApi.InitAsync(tessdataFolderobj.Path, "eng");
+        Rect winrtRect = new Rect(0, 0, 10000, 10000); // This is just an example
+        string result = await tessBaseApi.TesseractRectAsync(stream, winrtRect);
+        textBlock.Text = result;
+    }
+    catch (Exception ex)
+    {
+        textBlock.Text = "ERROR!!! - " + ex.Message;
+    }
+}
+
+Licensed under the Apache License, same as the original Tesseract source code.
 
 Original README file follows:
 =============================
