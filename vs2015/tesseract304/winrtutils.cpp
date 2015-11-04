@@ -66,4 +66,5 @@ BOOL GetProcessTimes(
 	return FALSE;
 }
 
+
 #endif

@@ -3,6 +3,8 @@
 
 #include "ccutil.h"
 
+#include "winrtutils.h"
+
 namespace tesseract {
 CCUtil::CCUtil() :
   params_(),
