@@ -3,7 +3,7 @@ Tesseract WinRT (Windows Phone/Windows Store Apps)
 
 This project is a fork of Tesseract Open Source OCR, modified for the WinRT platform (Windows Phone/Windows Store Apps)
 
-Currently it is only a proof of concept, a wrapper class that provides only a few configuration methods plus the methods TesseractRect, SetImage and GetUTF8Text fron the TessBaseAPI class. It depends on Leptonica WinRT (https://github.com/yoisel/leptonica_1.72_winrt) as a lib file, and the rest of the regular Tesseract and Leptonica dependencies are all disabled.
+Currently it is only a proof of concept, a wrapper class that provides only a few configuration methods plus the methods TesseractRect, SetImage and GetUTF8Text from the TessBaseAPI class. It depends on Leptonica WinRT (https://github.com/yoisel/leptonica_1.72_winrt) as source code generating a lib file, and the rest of the regular Tesseract and Leptonica dependencies are all disabled.
 
 Some internal features might be also disabled as result of the restrictions imposed by the WinRT platform, or the missing dependencies.
 
