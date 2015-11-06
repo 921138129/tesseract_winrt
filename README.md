@@ -1,11 +1,23 @@
 Tesseract WinRT (Windows Phone/Windows Store Apps)
 ==================================================
 
-This project is a fork of Tesseract Open Source OCR for the WinRT platform (Windows Phone/Windows Store Apps)
+This project is a fork of Tesseract Open Source OCR, modified for the WinRT platform (Windows Phone/Windows Store Apps)
 
-Currently it is only a proof of concept, only the Debug-x86 configuration works, it depends on Leptonica WinRT (https://github.com/yoisel/leptonica_1.72_winrt) as a lib file.
+Currently it is only a proof of concept, a wrapper class that provides only a few configuration methods plus the methods TesseractRect, SetImage and GetUTF8Text from the TessBaseAPI class. It depends on Leptonica WinRT (https://github.com/yoisel/leptonica_1.72_winrt) as source code generating a lib file, and the rest of the regular Tesseract and Leptonica dependencies are all disabled.
 
- Licensed under the Apache License, same as the original Tesseract source code.
+Some internal features might be also disabled as result of the restrictions imposed by the WinRT platform, or the missing dependencies.
+
+Compressed image formats like png and jpeg are still supported as input and will be decompressed on the fly using WIC (Windows Imaging Component).
+
+There is one project in the solution for generating a VSIX package (a visual studio extension), just for the UWP platform with Visual Studio 2015 at the moment.
+
+There is one C# sample project that shows how to use the library.
+
+Supported platforms: Windows Store Apps -> Windows 8.1, Windows Phone 8.1 and UWP (Windows 8 might come later, Windows Phone 8 however...)
+
+Supported CPU architectures: x86, x64 and ARM (since this is a native library, the AnyCPU configuration cannot be supported).
+
+Licensed under the Apache License, same as the original Tesseract source code.
 
 Original README file follows:
 =============================
