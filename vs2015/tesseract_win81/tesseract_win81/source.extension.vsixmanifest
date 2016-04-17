@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="Tesseract.Win81-1E921716-C4DB-49CE-9A84-CE2D6C9B9365" Version="3.04" Language="en-US" Publisher="Yoisel Melis Santana" />
+    <Identity Id="Tesseract.Win81-1E921716-C4DB-49CE-9A84-CE2D6C9B9365" Version="0.1" Language="en-US" Publisher="Yoisel Melis Santana" />
     <DisplayName>Tesseract OCR wrapper for WinRT</DisplayName>
     <Description xml:space="preserve">Tesseract for Windows 8.1 Store Apps</Description>
     <MoreInfo>https://github.com/yoisel/tesseract_winrt</MoreInfo>
@@ -14,7 +14,7 @@
 	  Details at: https://mix.office.com/watch/57b0xviavj6r
     Note: The value for SdkName should not contain any space
       -->
-    <InstallationTarget Id="Microsoft.ExtensionSDK" TargetPlatformIdentifier="Windows" TargetPlatformVersion="v8.1" SdkName="Tesseract.Win81" SdkVersion="3.4" />
+    <InstallationTarget Id="Microsoft.ExtensionSDK" TargetPlatformIdentifier="Windows" TargetPlatformVersion="v8.1" SdkName="Tesseract.Win81" SdkVersion="0.1" />
   </Installation>
   <Dependencies>
   </Dependencies>

@@ -105,7 +105,7 @@ mkdir "$(ProjectDir)\References\CommonConfiguration\Neutral" &gt; nul 2&gt; nul
 REM copy *.dll to \Redist\Debug\
 copy "$(SolutionDir)\Release\tesseract_win81.Windows\Tesseract.dll"        "$(ProjectDir)\Redist\Debug\x86"
 copy "$(SolutionDir)\x64\Release\tesseract_win81.Windows\Tesseract.dll"    "$(ProjectDir)\Redist\Debug\x64"
-copy "$(SolutionDir)\ARM\\Releasetesseract_win81.Windows\Tesseract.dll"    "$(ProjectDir)\Redist\Debug\Arm"
+copy "$(SolutionDir)\ARM\Release\tesseract_win81.Windows\Tesseract.dll"   "$(ProjectDir)\Redist\Debug\Arm"
 
 REM copy *.dll to \Redist\Retail\
 copy "$(SolutionDir)\Release\tesseract_win81.Windows\Tesseract.dll"        "$(ProjectDir)\Redist\Retail\x86"
